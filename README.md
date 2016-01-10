@@ -1,6 +1,4 @@
-= JiveTiles
-
-This project rocks and uses MIT-LICENSE.[![Gem Version](https://badge.fury.io/rb/jive_tiles.svg)](http://badge.fury.io/rb/jive_tiles)
+[![Gem Version](https://badge.fury.io/rb/jive_tiles.svg)](http://badge.fury.io/rb/jive_tiles)
 [![Build Status](https://travis-ci.org/butchmarshall/jive_tiles.svg?branch=master)](https://travis-ci.org/butchmarshall/jive_tiles)
 
 # JiveTiles
