@@ -6,7 +6,8 @@ module JiveTiles
 
 				def create
 					@tile = Jive::Tile::Model.new(register_params)
-					@tile.name = params[:name]
+					@tile.add_on = self.get_add_on
+					@tile.name = params[:name] || ""
 					@tile.uninstalled = false
 
 					render :nothing => true, :status => ((@tile.save)? 204 : 403)
@@ -23,6 +24,11 @@ module JiveTiles
 					render :nothing => true, :status => status
 				end
 
+				protected
+					def get_add_on
+						Jive::AddOn::Model.where(:client_id => env["jive.client_id"], :tenant_id => env["jive.tenant_id"]).first
+					end
+
 				private
 					def json_params
 						ActionController::Parameters.new(JSON.parse(request.body.read))
@@ -31,36 +37,48 @@ module JiveTiles
 					def unregister_params
 						json_params.tap { |whitelisted|
 							whitelisted[:tenant_id] = whitelisted[:tenantId]
-							whitelisted[:client_id] = whitelisted[:clientId]
 							whitelisted[:jive_url] = whitelisted[:jiveUrl]
-							whitelisted[:jive_signature_url] = whitelisted[:jiveSignatureURL]
+							whitelisted[:guid] = whitelisted[:guid]
 						}.permit(
 							:tenant_id,
-							:client_id,
 							:jive_url,
-							:jive_signature_url
+							:guid,
 						)
 					end
 
 					def register_params
-						json_params.tap { |whitelisted|
-							whitelisted[:guid] = whitelisted[:guid]
-							whitelisted[:remote_id] = whitelisted[:remoteID]
-							whitelisted[:config] = whitelisted[:config]
-							whitelisted[:name] = whitelisted[:name]
-							whitelisted[:jive_url] = whitelisted[:jiveUrl]
-							whitelisted[:tenant_id] = whitelisted[:tenantId]
-							whitelisted[:push_url] = whitelisted[:pushUrl]
+						data = json_params
+
+						data.tap { |whitelisted|
+							whitelisted[:tile_id] = whitelisted[:id]
+
 							whitelisted[:code] = whitelisted[:code]
+							whitelisted[:config] = whitelisted[:config]
+							whitelisted[:guid] = whitelisted[:guid]
+							whitelisted[:jive_url] = whitelisted[:jiveUrl]
+							whitelisted[:name] = whitelisted[:name]
+							whitelisted[:parent] = whitelisted[:parent]
+							whitelisted[:place_uri] = whitelisted[:placeUri]							
+							whitelisted[:tenant_id] = whitelisted[:tenantId]
+							whitelisted[:url] = whitelisted[:url]
+
+							whitelisted[:remote_id] = whitelisted[:remoteID]
+							whitelisted[:push_url] = whitelisted[:pushUrl]
 						}.permit(
+							:tile_id,
+							:code,
 							:guid,
-							:remote_id,
-							:config,
-							:name,
 							:jive_url,
+							:name,
+							:parent,
+							:place_uri,
 							:tenant_id,
+							:url,
+
+							:remote_id,
 							:push_url,
-							:cod
+						).merge(
+							:config => data[:config]
 						)
 					end
 			end
