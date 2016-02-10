@@ -10,7 +10,7 @@ module JiveTiles
 					@tile.name = params[:name] || ""
 					@tile.uninstalled = false
 
-					render :nothing => true, :status => ((@tile.save)? 204 : 403)
+					render :nothing => true, :status => ((@tile.save)? 200 : 403)
 				end
 
 				def destroy
@@ -18,7 +18,7 @@ module JiveTiles
 
 					@tile = Jive::Tile::Model.where(unregister_params).first
 					if @tile && @tile.update_attributes(:uninstalled => true)
-						status = 204
+						status = 200
 					end
 
 					render :nothing => true, :status => status
