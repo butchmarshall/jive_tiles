@@ -16,7 +16,7 @@ RSpec.describe JiveTiles::TilesController, type: :controller do
 			:ACCEPT => 'application/json',
 			:name => "dummy"
 		}
-		@add_on = Jive::AddOn::Model.create({
+		@add_on = Jive::AddOn.create({
 			"tenant_id"=>"b22e3911-28ef-480c-ae3b-ca791ba86952",
 			"client_id"=>"2zm4rzr9aiuvd4zhhg8kyfep229p2gce.i",
 			"client_secret"=>"evaqjrbfyu70jlvnap8fhnj2h5mr4vus.s",

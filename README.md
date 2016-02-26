@@ -8,6 +8,9 @@ JiveTiles is a mountable engine for Rails that enables [Jive](https://www.jiveso
 Release Notes
 ============
 
+**0.0.6**
+ - Compatability fixes with gem dependencies
+
 **0.0.1**
  - Dummy app now registers/unregisters tiles with [Jive Sandbox](https://sandbox.jiveon.com)
 

@@ -5,7 +5,7 @@ module JiveTiles
 				extend ActiveSupport::Concern
 
 				def create
-					@tile = Jive::Tile::Model.new(register_params)
+					@tile = Jive::Tile.new(register_params)
 					@tile.add_on = self.get_add_on
 					@tile.name = params[:name] || ""
 					@tile.uninstalled = false
@@ -16,7 +16,7 @@ module JiveTiles
 				def destroy
 					status = 403
 
-					@tile = Jive::Tile::Model.where(unregister_params).first
+					@tile = Jive::Tile.where(unregister_params).first
 					if @tile && @tile.update_attributes(:uninstalled => true)
 						status = 204
 					end
@@ -26,7 +26,7 @@ module JiveTiles
 
 				protected
 					def get_add_on
-						Jive::AddOn::Model.where(:client_id => env["jive.client_id"], :tenant_id => env["jive.tenant_id"]).first
+						Jive::AddOn.where(:client_id => env["jive.client_id"], :tenant_id => env["jive.tenant_id"]).first
 					end
 
 				private
