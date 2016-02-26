@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jive_tiles (0.0.3)
+    jive_tiles (0.0.5)
       jive-add_on
       jive-tile
       rails (>= 4.2.0)
@@ -69,13 +69,17 @@ GEM
       activesupport (>= 4.1.0)
     hashdiff (0.2.3)
     i18n (0.7.0)
-    jive-add_on (0.0.1)
+    jive-add_on (0.0.2)
       activerecord (>= 3.0, < 5.0)
       jive-signed_request
-    jive-signed_request (0.1.2)
-    jive-tile (0.0.5)
+    jive-oauth_token (0.0.4)
       activerecord (>= 3.0, < 5.0)
-      jive-add_on
+      jive-add_on (>= 0.0.2)
+    jive-signed_request (0.1.2)
+    jive-tile (0.0.10)
+      activerecord (>= 3.0, < 5.0)
+      jive-add_on (>= 0.0.2)
+      jive-oauth_token (>= 0.0.4)
     json (1.8.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -135,7 +139,7 @@ GEM
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.0.1)
+    sprockets-rails (3.0.3)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
